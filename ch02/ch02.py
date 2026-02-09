@@ -480,7 +480,7 @@ class AdalineSGD(object):
       Sum-of-squares cost function value averaged over all
       training examples in each epoch.
 
-        
+
     """
     def __init__(self, eta=0.01, n_iter=10, shuffle=True, random_state=None):
         self.eta = eta
@@ -488,7 +488,7 @@ class AdalineSGD(object):
         self.w_initialized = False
         self.shuffle = shuffle
         self.random_state = random_state
-        
+
     def fit(self, X, y):
         """ Fit training data.
 
@@ -532,13 +532,13 @@ class AdalineSGD(object):
         """Shuffle training data"""
         r = self.rgen.permutation(len(y))
         return X[r], y[r]
-    
+
     def _initialize_weights(self, m):
         """Initialize weights to small random numbers"""
         self.rgen = np.random.RandomState(self.random_state)
         self.w_ = self.rgen.normal(loc=0.0, scale=0.01, size=1 + m)
         self.w_initialized = True
-        
+
     def _update_weights(self, xi, target):
         """Apply Adaline learning rule to update the weights"""
         output = self.activation(self.net_input(xi))
@@ -547,7 +547,7 @@ class AdalineSGD(object):
         self.w_[0] += self.eta * error
         cost = 0.5 * error**2
         return cost
-    
+
     def net_input(self, X):
         """Calculate net input"""
         return np.dot(X, self.w_[1:]) + self.w_[0]
